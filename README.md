@@ -62,5 +62,4 @@ The configuration will be written to  ```app/config/packages/spatie/activitylog`
   	         if not proved the id of Auth::user() will be used
   
 */
-
 Activity::log('Some activity that you wish to log');
