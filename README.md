@@ -15,6 +15,7 @@ This package can be installed through Composer.
 }
 ```
 
+
 This service provider must be registered.
 ```php
 
@@ -26,11 +27,13 @@ This service provider must be registered.
 ];
 ```
 
+
 You'll also need to publish and run the migration in order to create the db-table.
 ```
 php artisan migrate:publish spatie/activitylog
 php artisan migrate 
 ```
+
 
 Activitylog also comes with a facade, which provides an easy way to call it.
 ```php
@@ -43,11 +46,11 @@ Activitylog also comes with a facade, which provides an easy way to call it.
 )
 ```
 
+
 Optionally you can publish the config file of this package.
 ```
 php artisan config:publish spatie/activitylog 
 ```
-
 The configuration will be written to  ```app/config/packages/spatie/activitylog```. The options provided are self explanatory.
 
 
