@@ -43,7 +43,7 @@ Activitylog also comes with a facade, which provides an easy way to call it.
 
 'aliases' => array(
 	...
-	'Geocoder' => 'Spatie\Activitylog\ActivityFacade',
+	'Activity' => 'Spatie\Activitylog\ActivityFacade',
 )
 ```
 
