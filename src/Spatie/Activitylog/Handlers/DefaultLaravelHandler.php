@@ -27,4 +27,20 @@ class DefaultLaravelHandler implements HandlerInterface {
 
         return true;
     }
+
+
+    /**
+     *
+     * Clean old log records
+     *
+     * @param int $maxAgeInMonths
+     * @return boolean
+     */
+
+    public function cleanLog($maxAgeInMonths)
+    {
+        //this handler can't clean it's records
+
+        return true;
+    }
 }

@@ -3,7 +3,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Use Laravel's default log handler
+    | Also log to Laravel's default log handler
     |--------------------------------------------------------------------------
     |
     | If "alsoLogInDefaultLog" the activity will also be logged in the default
@@ -11,4 +11,16 @@ return [
     |
     */
     'alsoLogInDefaultLog'        => true,
-];
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Max age in months for log records
+    |--------------------------------------------------------------------------
+    |
+    | When running the cleanLog-command all recorder older than the number of months
+    | specified here will be deleted
+    |
+    */
+        'deleteRecordsOlderThanMonths'        => 2,
+    ];

@@ -13,4 +13,14 @@ interface ActivitylogHandler {
      */
 
     public function log($text, $user = '', $attributes = []);
+
+    /**
+     *
+     * Clean old log records
+     *
+     * @param int $maxAgeInMonths
+     * @return boolean
+     */
+
+    public function cleanLog($maxAgeInMonths);
 }
