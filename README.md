@@ -2,11 +2,11 @@
 
 [![License](https://poser.pugx.org/spatie/googlesearch/license.png)](https://packagist.org/packages/spatie/googlesearch)
 
+This package provides a very easy to use solution to log the activities of the users of your website or web application. All the activities will be logged in a db-table. Optionally the activities can also be logged against the default Laravel Log Handler.
 
 ## Installation
 
 This package can be installed through Composer.
-
 ```js
 {
     "require": {
@@ -16,7 +16,6 @@ This package can be installed through Composer.
 ```
 
 This service provider must be registered.
-
 ```php
 
 // app/config/app.php
@@ -28,15 +27,12 @@ This service provider must be registered.
 ```
 
 You'll also need to publish and run the migration in order to create the db-table.
-
 ```
 php artisan migrate:publish spatie/activitylog
 php artisan migrate 
 ```
 
 Activitylog also comes with a facade, which provides an easy way to call it.
-
-
 ```php
 
 // app/config/app.php
@@ -47,29 +43,24 @@ Activitylog also comes with a facade, which provides an easy way to call it.
 )
 ```
 
+Optionally you can publish the config file of this package.
+```
+php artisan config:publish spatie/activitylog 
+```
 
+The configuration will be written to  ```app/config/packages/spatie/activitylog```. The options provided are self explanatory.
 
 
 ## Usage
 
 ```php
 
-Geocoder::getCoordinatesForQuery('Infinite Loop 1, Cupertino');
-
 /* 
-  This function returns an array with keys
-  "lat" =>  37.331741000000001
-  "lng" => -122.0303329
-  "accuracy" => "ROOFTOP"
+  The log-function takes two parameters:
+  	- $text: the activity you wish to log.
+  	- $user: optional can be an user id or a user object. 
+  	         if not proved the id of Auth::user() will be used
+  
 */
-```
 
-The accuracy key can contain these values:
-- 'ROOFTOP'
-- 'RANGE_INTERPOLATED'
-- 'GEOMETRIC_CENTER'
-- 'APPROXIMATE'
-
-You can read more information about these values [on the Google Geocoding API Page](https://developers.google.com/maps/documentation/geocoding/ "Google Geocoding API")
-
-When an address is not found accuracy will contain 'NOT_FOUND'
+Activity::log('Some activity that you wish to log');
