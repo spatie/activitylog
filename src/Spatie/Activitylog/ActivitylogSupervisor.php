@@ -58,7 +58,7 @@ class ActivitylogSupervisor
     public function cleanLog()
     {
         foreach($this->logHandlers as $logHandler) {
-            $logHandler->clean(Config::get('activitylog::deleteRecordsOlderThanMonths'));
+            $logHandler->cleanLog(Config::get('activitylog::deleteRecordsOlderThanMonths'));
         }
 
         return true;
