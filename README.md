@@ -73,4 +73,4 @@ Over time your log will grow. To clean up the database table you can run this co
 ```php
 Activity::cleanLog();
 ```
-By default records older than 2 months will be deleted. The number of months can be modified in the config-file of the package
+By default records older than 2 months will be deleted. The number of months can be modified in the config-file of the package.
