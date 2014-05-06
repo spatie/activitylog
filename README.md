@@ -71,6 +71,6 @@ Activity::log('Some activity that you wish to log');
 
 Over time your log will grow. To clean up the database table you can run this command:
 ```php
-Activity::cleanLog('Some activity that you wish to log');
+Activity::cleanLog();
 ```
 By default records older than 2 months will be deleted. The number of months can be modified in the config-file of the package
