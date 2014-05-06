@@ -23,7 +23,7 @@ This service provider must be registered.
 
 'providers' => [
     '...',
-    'Spatie\Activitylog\ActivityServiceProvider'
+    'Spatie\Activitylog\ActivitylogServiceProvider'
 ];
 ```
 
