@@ -56,6 +56,7 @@ The configuration will be written to  ```app/config/packages/spatie/activitylog`
 
 ## Usage
 
+Logging some activity is very simple.
 ```php
 
 /* 
@@ -66,3 +67,10 @@ The configuration will be written to  ```app/config/packages/spatie/activitylog`
   
 */
 Activity::log('Some activity that you wish to log');
+```
+
+Over time your log will grow. To clean up the database table you can run this command:
+```php
+Activity::cleanLog('Some activity that you wish to log');
+```
+By default records older than 2 months will be deleted. The number of months can be modified in the config-file of the package
