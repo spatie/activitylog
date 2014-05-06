@@ -1,0 +1,31 @@
+{
+    "name": "spatie/activitylog",
+    "description": "A very simple activity logger to monitor the users of your website or application",
+    "keywords":
+        [
+            "log",
+            "user",
+            "activity",
+            "laravel"
+        ],
+    "authors": [
+        {
+            "name": "Freek Van der Herten",
+            "email": "freek@spatie.be"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.1.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-0": {
+            "Spatie\\Activitylog\\": "src/"
+        }
+    },
+    "license": "MIT",
+    "minimum-stability": "stable"
+}
