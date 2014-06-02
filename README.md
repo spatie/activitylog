@@ -1,6 +1,6 @@
 # Log the activities of your users
 
-[![License](https://poser.pugx.org/spatie/googlesearch/license.png)](https://packagist.org/packages/spatie/googlesearch)
+[![License](https://poser.pugx.org/spatie/activitylog/license.png)](https://packagist.org/packages/spatie/activitylog)
 
 This package provides a very easy to use solution to log the activities of the users of your Laravel 4 website or web application. All the activities will be logged in a db-table. Optionally the activities can also be logged against the default Laravel Log Handler.
 
