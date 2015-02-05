@@ -67,6 +67,7 @@ Logging some activity is very simple.
 */
 Activity::log('Some activity that you wish to log');
 ```
+The string you pass to function gets written in a db-table together with a timestamp, the ip address and the user agent of the user.
 
 Over time your log will grow. To clean up the database table you can run this command:
 ```php
