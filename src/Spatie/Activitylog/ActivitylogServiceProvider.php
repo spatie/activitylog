@@ -1,6 +1,8 @@
 <?php namespace Spatie\Activitylog;
 
+use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 class ActivitylogServiceProvider extends ServiceProvider {
 
@@ -18,7 +20,23 @@ class ActivitylogServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('spatie/activitylog');
+
+		if ($this->isLegacyLaravel())
+		{
+			$this->package('spatie/activitylog');
+		}
+		else
+		{
+			// Publish a config file
+			$this->publishes([
+				__DIR__.'/../../config/activitylog.php' => config_path('activitylog.php')
+			], 'config');
+
+// Publish your migrations
+			$this->publishes([
+				__DIR__.'/../../migrations/' => base_path('/database/migrations')
+			], 'migrations');
+		}
 	}
 
 	/**
@@ -28,15 +46,15 @@ class ActivitylogServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-        $this->app->bind(
-            'activity',
-            'Spatie\Activitylog\ActivitylogSupervisor'
-        );
+		$this->app->bind(
+			'activity',
+			'Spatie\Activitylog\ActivitylogSupervisor'
+		);
 
-        $this->app->bind(
-            'Spatie\Activitylog\Handlers\ActivitylogHandler',
-            'Spatie\Activitylog\Handlers\EloquentHandler'
-        );
+		$this->app->bind(
+			'Spatie\Activitylog\Handlers\ActivitylogHandler',
+			'Spatie\Activitylog\Handlers\EloquentHandler'
+		);
 	}
 
 	/**
@@ -46,7 +64,7 @@ class ActivitylogServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return array();
+		return [];
 	}
 
 }

@@ -23,7 +23,7 @@ class ActivitylogSupervisor
     public function __construct(Handlers\ActivitylogHandler $handler)
     {
         $this->logHandlers[] = $handler;
-        if (Config::get('activitylog::alsoLogInDefaultLog')) {
+        if (Config::get('activitylog.alsoLogInDefaultLog')) {
             $this->logHandlers[] = new DefaultLaravelHandler();
         }
     }
@@ -58,7 +58,7 @@ class ActivitylogSupervisor
     public function cleanLog()
     {
         foreach($this->logHandlers as $logHandler) {
-            $logHandler->cleanLog(Config::get('activitylog::deleteRecordsOlderThanMonths'));
+            $logHandler->cleanLog(Config::get('activitylog.deleteRecordsOlderThanMonths'));
         }
 
         return true;

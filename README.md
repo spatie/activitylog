@@ -3,7 +3,11 @@
 [![License](https://poser.pugx.org/spatie/activitylog/license.png)](https://packagist.org/packages/spatie/activitylog)
 [![Total Downloads](https://poser.pugx.org/spatie/activitylog/downloads.svg)](https://packagist.org/packages/spatie/activitylog)
 
-This package provides a very easy to use solution to log the activities of the users of your Laravel 4 website or web application. All the activities will be logged in a db-table. Optionally the activities can also be logged against the default Laravel Log Handler.
+This Laravel 5 package provides a very easy to use solution to log the activities of the users of your Laravel 5 app. All the activities will be logged in a db-table. Optionally the activities can also be logged against the default Laravel Log Handler.
+
+### Note:
+
+If you're using Laravel 4, take a look at version 0.3.0 of this package.
 
 ## Installation
 
