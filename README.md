@@ -19,8 +19,6 @@ composer require spatie/activitylog
 
 This service provider must be registered.
 ```php
-
-
 // config/app.php
 
 'providers' => [
@@ -39,7 +37,6 @@ php artisan migrate
 
 Activitylog also comes with a facade, which provides an easy way to call it.
 ```php
-
 // config/app.php
 
 'aliases' => [
