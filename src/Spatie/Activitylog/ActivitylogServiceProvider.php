@@ -20,23 +20,16 @@ class ActivitylogServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-
-		if ($this->isLegacyLaravel())
-		{
-			$this->package('spatie/activitylog');
-		}
-		else
-		{
-			// Publish a config file
-			$this->publishes([
-				__DIR__.'/../../config/activitylog.php' => config_path('activitylog.php')
-			], 'config');
+		// Publish a config file
+		$this->publishes([
+			__DIR__.'/../../config/activitylog.php' => config_path('activitylog.php')
+		], 'config');
 
 // Publish your migrations
-			$this->publishes([
-				__DIR__.'/../../migrations/' => base_path('/database/migrations')
-			], 'migrations');
-		}
+		$this->publishes([
+			__DIR__.'/../../migrations/' => base_path('/database/migrations')
+		], 'migrations');
+
 	}
 
 	/**
