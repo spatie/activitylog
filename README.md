@@ -20,8 +20,8 @@ composer require spatie/activitylog
 This service provider must be registered.
 ```php
 
-// Laravel 4: app/config/app.php
-// Laravel 5: config/app.php
+
+// config/app.php
 
 'providers' => [
     '...',
@@ -32,7 +32,7 @@ This service provider must be registered.
 
 You'll also need to publish and run the migration in order to create the db-table.
 ```
-php artisan migrate:publish spatie/activitylog
+php artisan vendor:publish --provider="Spatie\Activitylog\ActivitylogServiceProvider" --tag="migrations"
 php artisan migrate 
 ```
 
@@ -40,8 +40,7 @@ php artisan migrate
 Activitylog also comes with a facade, which provides an easy way to call it.
 ```php
 
-// Laravel 4: app/config/app.php
-// Laravel 5: config/app.php
+// config/app.php
 
 'aliases' => [
 	...
@@ -52,9 +51,9 @@ Activitylog also comes with a facade, which provides an easy way to call it.
 
 Optionally you can publish the config file of this package.
 ```
-php artisan config:publish spatie/activitylog 
+php artisan vendor:publish --provider="Spatie\Activitylog\ActivitylogServiceProvider" --tag="config"
 ```
-The configuration will be written to  ```app/config/packages/spatie/activitylog```. The options provided are self explanatory.
+The configuration will be written to  ```config/activitylog.php```. The options provided are self explanatory.
 
 
 ## Usage
