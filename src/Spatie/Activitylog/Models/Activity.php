@@ -2,6 +2,7 @@
 
 use Eloquent;
 use DateTime;
+use Config;
 
 class Activity extends Eloquent {
 
@@ -19,7 +20,7 @@ class Activity extends Eloquent {
      */
     public function user()
     {
-        return $this->belongsTo('User', 'user_id');
+        return $this->belongsTo(Config::get('auth.model'), 'user_id');
     }
 
     protected $guarded = array('id');
