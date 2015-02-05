@@ -8,23 +8,20 @@ This package provides a very easy to use solution to log the activities of the u
 ## Installation
 
 This package can be installed through Composer.
-```js
-{
-    "require": {
-		"spatie/activitylog": "dev-master"
-	}
-}
+```bash
+composer require spatie/activitylog
 ```
 
 
 This service provider must be registered.
 ```php
 
-// app/config/app.php
+// Laravel 4: app/config/app.php
+// Laravel 5: config/app.php
 
 'providers' => [
     '...',
-    'Spatie\Activitylog\ActivitylogServiceProvider'
+    'Spatie\Activitylog\ActivitylogServiceProvider',
 ];
 ```
 
@@ -39,12 +36,13 @@ php artisan migrate
 Activitylog also comes with a facade, which provides an easy way to call it.
 ```php
 
-// app/config/app.php
+// Laravel 4: app/config/app.php
+// Laravel 5: config/app.php
 
-'aliases' => array(
+'aliases' => [
 	...
 	'Activity' => 'Spatie\Activitylog\ActivitylogFacade',
-)
+];
 ```
 
 
