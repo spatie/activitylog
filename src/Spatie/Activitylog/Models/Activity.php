@@ -23,16 +23,12 @@ class Activity extends Eloquent {
         return $this->belongsTo(Config::get('auth.model'), 'user_id');
     }
 
-    protected $guarded = array('id');
+    protected $guarded = ['id'];
 
-    public $timestamps = false;
-
-    public static function boot()
-    {
-        parent::boot();
-
-        static::saving(function($activity) {
-            $activity->created_at = new DateTime();
-        });
+    public function getDates() {
+        return ['created_at'];
     }
+
+
+
 }

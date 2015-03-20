@@ -18,7 +18,6 @@ class ActivityLogTable extends Migration {
             $table->integer('user_id')->nullable();
             $table->string('text');
             $table->timestamp('created_at');
-            $table->string('user_agent');
             $table->string('ip_address', 64);
 
         });

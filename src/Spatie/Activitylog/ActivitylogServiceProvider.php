@@ -1,8 +1,6 @@
 <?php namespace Spatie\Activitylog;
 
-use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Str;
 
 class ActivitylogServiceProvider extends ServiceProvider {
 
@@ -26,8 +24,10 @@ class ActivitylogServiceProvider extends ServiceProvider {
 		], 'config');
 
 // Publish your migrations
+        $timestamp = date('Y_m_d_His', time());
+
 		$this->publishes([
-			__DIR__.'/../../migrations/' => base_path('/database/migrations')
+			__DIR__.'/../../migrations/create_activity_log_table.php' => base_path('/database/migrations/'.$timestamp.'_create_activity_log_table.php')
 		], 'migrations');
 
 	}

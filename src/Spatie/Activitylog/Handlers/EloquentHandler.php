@@ -25,10 +25,9 @@ class EloquentHandler implements HandlerInterface {
     {
         Activity::create(
             [
-                'text'       =>$text,
+                'text'       => $text,
                 'user_id'    => ($user ? $user->id : null),
                 'ip_address' => $attributes['ipAddress'],
-                'user_agent' => $attributes['userAgent']
             ]
         );
 

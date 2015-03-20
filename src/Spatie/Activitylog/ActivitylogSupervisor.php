@@ -46,10 +46,9 @@ class ActivitylogSupervisor
         }
 
         $ipAddress = Request::getClientIp();
-        $userAgent = Request::server('HTTP_USER_AGENT');
 
         foreach($this->logHandlers as $logHandler) {
-            $logHandler->log($text, $user, compact('ipAddress','userAgent'));
+            $logHandler->log($text, $user, compact('ipAddress'));
         }
 
         return true;

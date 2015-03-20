@@ -11,7 +11,6 @@ class ActivityLogFacade extends Facade {
      */
     protected static function getFacadeAccessor()
     {
-
         return 'activity';
     }
 
