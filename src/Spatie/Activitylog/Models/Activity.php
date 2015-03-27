@@ -25,10 +25,6 @@ class Activity extends Eloquent {
 
     protected $guarded = ['id'];
 
-    public function getDates() {
-        return ['created_at'];
-    }
-
 
 
 }

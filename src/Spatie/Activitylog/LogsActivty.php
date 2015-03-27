@@ -1,7 +1,6 @@
-<?php namespace Spatie\ActivityFeed\Traits;
+<?php namespace Spatie\Activitylog;
 
 use Activity;
-use Spatie\Activitylog\LogsActivityInterface;
 
 trait LogsActivity {
 
@@ -13,19 +12,20 @@ trait LogsActivity {
 
                 $message = $model->getActivityDescriptionForEvent($eventName);
 
-                if ($message == '')
+                if ($message != '')
                 {
-                    $className = strtolower((new ReflectionClass($model))->getShortName());
-
-                    $message = $className . ' - ' . $eventName;
+                    Activity::log($message);
                 }
-
-                Activity::log($message);
-
             });
         }
     }
 
+    /**
+     * Set the default events to be recorded if the $recordEvents
+     * property does not exist on the model.
+     *
+     * @return array
+     */
     protected static function getRecordActivityEvents()
     {
         if(isset(static::$recordEvents))
@@ -34,7 +34,7 @@ trait LogsActivity {
         }
 
         return [
-            'created', 'deleted', 'updated',
+            'created', 'updated', 'deleting', 'deleted'
         ];
     }
 

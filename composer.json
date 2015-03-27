@@ -18,6 +18,9 @@
         "php": ">=5.4.0",
         "illuminate/support": "5.*"
     },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
     "autoload": {
         "classmap": [
             "src/migrations"

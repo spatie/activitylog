@@ -54,6 +54,11 @@ class ActivitylogSupervisor
         return true;
     }
 
+    /**
+     * Clean out old entries in the log
+     *
+     * @return bool
+     */
     public function cleanLog()
     {
         foreach($this->logHandlers as $logHandler) {
