@@ -92,31 +92,34 @@ The interface expects you to implement the `getActivityDescriptionForEvent`-func
 
 Here's an example of a possible implementation.
 
-```
-/**
-* Get the message that needs to be logged for the given event.
-*
-* @param string $eventName
-* @return string
-*/
-public function getActivityDescriptionForEvent($eventName)
-{
-if ($eventName == 'created')
-{
-return 'Article "' . $this->name . '" was created';
-}
+```php
+    /**
+     * Get the message that needs to be logged for the given event name.
+     *
+     * @param string $eventName
+     * @return string
+     */
+    public function getActivityDescriptionForEvent($eventName)
+    {
+        if ($eventName == 'created')
+        {
+            return 'Artikel "' . $this->name . '" werd aangemaakt';
+        }
 
-if ($eventName == 'updated')
-{
-return 'Article "' . $this->name . '" was updated';
-}
+        if ($eventName == 'updated')
+        {
+            return 'Artikel "' . $this->name . '" werd aangepast';
+        }
 
-if ($eventName == 'deleted')
-{
-return 'Article "' . $this->name . '" was deleted';
-}
+        if ($eventName == 'deleting')
+        {
+            return 'Artikel "' . $this->name . '" werd verwijderd';
+        }
 
-return '';
+        return '';
+    }
+
+}
 }
 ```
 The result of this function will be logged, unless the result is an empty string.
