@@ -103,17 +103,17 @@ public function getActivityDescriptionForEvent($eventName)
 {
     if ($eventName == 'created')
     {
-        return 'Artikel "' . $this->name . '" werd aangemaakt';
+        return 'Article "' . $this->name . '" was created';
     }
 
     if ($eventName == 'updated')
     {
-        return 'Artikel "' . $this->name . '" werd aangepast';
+        return 'Article "' . $this->name . '" was deleted';
     }
 
-    if ($eventName == 'deleting')
+    if ($eventName == 'deleted')
     {
-        return 'Artikel "' . $this->name . '" werd verwijderd';
+        return 'Article "' . $this->name . '" was deleted';
     }
 
     return '';
