@@ -78,6 +78,50 @@ The string you pass to function gets written in a db-table together with a times
 ### Log model events
 This package can log the events from your models. To do so your model must use the `LogsActivity`-trait and implement `LogsActivityInterface`.
 
+```php
+use Spatie\Activitylog\LogsActivityInterface;
+use Spatie\Activitylog\LogsActivity;
+
+class Article implements LogsActivityInterface {
+
+   use LogsActivity;
+...
+```
+
+The interface expects you to implement the `getActivityDescriptionForEvent`-function.
+
+Here's an example of a possible implementation.
+
+```
+/**
+* Get the message that needs to be logged for the given event.
+*
+* @param string $eventName
+* @return string
+*/
+public function getActivityDescriptionForEvent($eventName)
+{
+if ($eventName == 'created')
+{
+return 'Article "' . $this->name . '" was created';
+}
+
+if ($eventName == 'updated')
+{
+return 'Article "' . $this->name . '" was updated';
+}
+
+if ($eventName == 'deleted')
+{
+return 'Article "' . $this->name . '" was deleted';
+}
+
+return '';
+}
+```
+The result of this function will be logged, unless the result is an empty string.
+
+
 
 
 ### Cleaning up the log
