@@ -40,7 +40,7 @@ class ActivitylogServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
-            'Spatie\Activitylog\Handlers\ActivitylogHandler',
+            'Spatie\Activitylog\Handlers\ActivitylogHandlerInterface',
             'Spatie\Activitylog\Handlers\EloquentHandler'
         );
     }
