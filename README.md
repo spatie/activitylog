@@ -122,8 +122,6 @@ public function getActivityDescriptionForEvent($eventName)
 The result of this function will be logged, unless the result is an empty string.
 
 
-
-
 ### Cleaning up the log
 
 Over time your log will grow. To clean up the database table you can run this command:
