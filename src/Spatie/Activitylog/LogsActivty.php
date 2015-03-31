@@ -2,7 +2,7 @@
 
 use Activity;
 
-trait LogsActivty
+trait LogsActivity
 {
     protected static function bootLogsActivity()
     {

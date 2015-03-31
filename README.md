@@ -59,6 +59,8 @@ The configuration will be written to  ```config/activitylog.php```. The options 
 
 ## Usage
 
+### Manual logging
+
 Logging some activity is very simple.
 ```php
 
@@ -72,6 +74,13 @@ Logging some activity is very simple.
 Activity::log('Some activity that you wish to log');
 ```
 The string you pass to function gets written in a db-table together with a timestamp, the ip address and the user agent of the user.
+
+### Log model events
+This package can log the events from your models. To do so your model must use the `LogsActivity`-trait and implement `LogsActivityInterface`.
+
+
+
+### Cleaning up the log
 
 Over time your log will grow. To clean up the database table you can run this command:
 ```php
