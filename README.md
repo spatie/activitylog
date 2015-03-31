@@ -1,7 +1,11 @@
 # Log the activities of your users
 
-[![License](https://poser.pugx.org/spatie/activitylog/license.png)](https://packagist.org/packages/spatie/activitylog)
-[![Total Downloads](https://poser.pugx.org/spatie/activitylog/downloads.svg)](https://packagist.org/packages/spatie/activitylog)
+[![Latest Version](https://img.shields.io/github/release/freekmurze/activitylog.svg?style=flat-square)](https://github.com/freekmurze/activitylog/releases)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![Build Status](https://img.shields.io/travis/freekmurze/activitylog/master.svg?style=flat-square)](https://travis-ci.org/freekmurze/activitylog)
+[![SensioLabsInsight](https://img.shields.io/sensiolabs/i/c48809c7-cdb3-4e86-974b-ad9c6282bc3c.svg)](https://insight.sensiolabs.com/projects/c48809c7-cdb3-4e86-974b-ad9c6282bc3c)
+[![Quality Score](https://img.shields.io/scrutinizer/g/freekmurze/activitylog.svg?style=flat-square)](https://scrutinizer-ci.com/g/freekmurze/activitylog)
+[![Total Downloads](https://img.shields.io/packagist/dt/spatie/activitylog.svg?style=flat-square)](https://packagist.org/packages/spatie/activitylog)
 
 This Laravel 5 package provides a very easy to use solution to log the activities of the users of your Laravel 5 app. All the activities will be logged in a db-table. Optionally the activities can also be logged against the default Laravel Log Handler.
 
