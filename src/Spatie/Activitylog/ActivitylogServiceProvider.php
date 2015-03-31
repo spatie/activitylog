@@ -2,62 +2,56 @@
 
 use Illuminate\Support\ServiceProvider;
 
-class ActivitylogServiceProvider extends ServiceProvider {
+class ActivitylogServiceProvider extends ServiceProvider
+{
+    /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = false;
 
-	/**
-	 * Indicates if loading of the provider is deferred.
-	 *
-	 * @var bool
-	 */
-	protected $defer = false;
-
-	/**
-	 * Bootstrap the application events.
-	 *
-	 * @return void
-	 */
-	public function boot()
-	{
-		// Publish a config file
-		$this->publishes([
-			__DIR__.'/../../config/activitylog.php' => config_path('activitylog.php')
-		], 'config');
+    /**
+     * Bootstrap the application events.
+     */
+    public function boot()
+    {
+        // Publish a config file
+        $this->publishes([
+            __DIR__.'/../../config/activitylog.php' => config_path('activitylog.php'),
+        ], 'config');
 
 // Publish your migrations
         $timestamp = date('Y_m_d_His', time());
 
-		$this->publishes([
-			__DIR__.'/../../migrations/create_activity_log_table.php' => base_path('/database/migrations/'.$timestamp.'_create_activity_log_table.php')
-		], 'migrations');
+        $this->publishes([
+            __DIR__.'/../../migrations/create_activity_log_table.php' => base_path('/database/migrations/'.$timestamp.'_create_activity_log_table.php'),
+        ], 'migrations');
+    }
 
-	}
+    /**
+     * Register the service provider.
+     */
+    public function register()
+    {
+        $this->app->bind(
+            'activity',
+            'Spatie\Activitylog\ActivitylogSupervisor'
+        );
 
-	/**
-	 * Register the service provider.
-	 *
-	 * @return void
-	 */
-	public function register()
-	{
-		$this->app->bind(
-			'activity',
-			'Spatie\Activitylog\ActivitylogSupervisor'
-		);
+        $this->app->bind(
+            'Spatie\Activitylog\Handlers\ActivitylogHandler',
+            'Spatie\Activitylog\Handlers\EloquentHandler'
+        );
+    }
 
-		$this->app->bind(
-			'Spatie\Activitylog\Handlers\ActivitylogHandler',
-			'Spatie\Activitylog\Handlers\EloquentHandler'
-		);
-	}
-
-	/**
-	 * Get the services provided by the provider.
-	 *
-	 * @return array
-	 */
-	public function provides()
-	{
-		return [];
-	}
-
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return [];
+    }
 }

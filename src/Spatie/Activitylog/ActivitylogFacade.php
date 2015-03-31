@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Facade;
 
-class ActivityLogFacade extends Facade {
-
+class ActivitylogFacade extends Facade
+{
     /**
      * Get the registered name of the component.
      *
@@ -13,5 +13,4 @@ class ActivityLogFacade extends Facade {
     {
         return 'activity';
     }
-
 }

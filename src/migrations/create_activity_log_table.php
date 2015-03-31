@@ -3,17 +3,14 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateActivityLogTable extends Migration {
-
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-        Schema::create('activity_log', function(Blueprint $table)
-        {
+class CreateActivityLogTable extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up()
+    {
+        Schema::create('activity_log', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->nullable();
             $table->string('text');
@@ -21,16 +18,13 @@ class CreateActivityLogTable extends Migration {
             $table->string('ip_address', 64);
 
         });
-	}
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
+    /**
+     * Reverse the migrations.
+     */
+    public function down()
+    {
         Schema::drop('activity_log');
-	}
-
+    }
 }

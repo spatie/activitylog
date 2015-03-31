@@ -12,7 +12,6 @@ return [
     */
     'alsoLogInDefaultLog'        => true,
 
-
     /*
     |--------------------------------------------------------------------------
     | Max age in months for log records

@@ -1,11 +1,10 @@
 <?php namespace Spatie\Activitylog\Models;
 
 use Eloquent;
-use DateTime;
 use Config;
 
-class Activity extends Eloquent {
-
+class Activity extends Eloquent
+{
     /**
      * The database table used by the model.
      *
@@ -24,7 +23,4 @@ class Activity extends Eloquent {
     }
 
     protected $guarded = ['id'];
-
-
-
 }

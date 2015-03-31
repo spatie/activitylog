@@ -2,18 +2,16 @@
 
 use Activity;
 
-trait LogsActivity {
-
+trait LogsActivty
+{
     protected static function bootLogsActivity()
     {
-        foreach(static::getRecordActivityEvents() as $eventName)
-        {
-            static::$eventName(function(LogsActivityInterface $model) use($eventName){
+        foreach (static::getRecordActivityEvents() as $eventName) {
+            static::$eventName(function (LogsActivityInterface $model) use ($eventName) {
 
                 $message = $model->getActivityDescriptionForEvent($eventName);
 
-                if ($message != '')
-                {
+                if ($message != '') {
                     Activity::log($message);
                 }
             });
@@ -28,14 +26,12 @@ trait LogsActivity {
      */
     protected static function getRecordActivityEvents()
     {
-        if(isset(static::$recordEvents))
-        {
+        if (isset(static::$recordEvents)) {
             return static::$recordEvents;
         }
 
         return [
-            'created', 'updated', 'deleting', 'deleted'
+            'created', 'updated', 'deleting', 'deleted',
         ];
     }
-
 }

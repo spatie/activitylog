@@ -6,22 +6,18 @@ use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Handlers\ActivitylogHandler as HandlerInterface;
 use Carbon\Carbon;
 
-class EloquentHandler implements HandlerInterface {
-
-
+class EloquentHandler implements HandlerInterface
+{
     /**
-     *
-     * Log activity in an Eloquent model
+     * Log activity in an Eloquent model.
      *
      * @param string $text
      * @param $userId
-     * @param array $attributes
-     * @return boolean
+     * @param array  $attributes
      *
+     * @return boolean
      */
-
     public function log($text, $userId = '', $attributes = [])
-
     {
         Activity::create(
             [
@@ -35,13 +31,12 @@ class EloquentHandler implements HandlerInterface {
     }
 
     /**
-     *
-     * Clean old log records
+     * Clean old log records.
      *
      * @param int $maxAgeInMonths
+     *
      * @return boolean
      */
-
     public function cleanLog($maxAgeInMonths)
     {
         $minimumDate = Carbon::now()->subMonths($maxAgeInMonths);

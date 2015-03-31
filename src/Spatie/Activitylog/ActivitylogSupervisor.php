@@ -1,7 +1,6 @@
 <?php namespace Spatie\Activitylog;
 
 use Spatie\Activitylog\Handlers\DefaultLaravelHandler;
-use User;
 use Auth;
 use Request;
 use Config;
@@ -14,9 +13,8 @@ class ActivitylogSupervisor
     protected $logHandlers = [];
 
     /**
-     *
      * Create the logsupervisor using a default Handler
-     * Also register Laravels Log Handler if needed
+     * Also register Laravels Log Handler if needed.
      *
      * @param Handlers\ActivitylogHandler $handler
      */
@@ -29,11 +27,11 @@ class ActivitylogSupervisor
     }
 
     /**
-     *
-     * Log some activity to all registered log handlers
+     * Log some activity to all registered log handlers.
      *
      * @param $text
      * @param string $userId
+     *
      * @return bool
      */
     public function log($text, $userId = '')
@@ -42,7 +40,7 @@ class ActivitylogSupervisor
 
         $ipAddress = Request::getClientIp();
 
-        foreach($this->logHandlers as $logHandler) {
+        foreach ($this->logHandlers as $logHandler) {
             $logHandler->log($text, $userId, compact('ipAddress'));
         }
 
@@ -50,13 +48,13 @@ class ActivitylogSupervisor
     }
 
     /**
-     * Clean out old entries in the log
+     * Clean out old entries in the log.
      *
      * @return bool
      */
     public function cleanLog()
     {
-        foreach($this->logHandlers as $logHandler) {
+        foreach ($this->logHandlers as $logHandler) {
             $logHandler->cleanLog(Config::get('activitylog.deleteRecordsOlderThanMonths'));
         }
 
@@ -67,6 +65,7 @@ class ActivitylogSupervisor
      * Normalize the user id.
      *
      * @param $userId
+     *
      * @return int
      */
     public function normalizeUserId($userId)

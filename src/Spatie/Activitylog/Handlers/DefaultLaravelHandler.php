@@ -5,38 +5,35 @@ namespace Spatie\Activitylog\Handlers;
 use Log;
 use Spatie\Activitylog\Handlers\ActivitylogHandler as HandlerInterface;
 
-class DefaultLaravelHandler implements HandlerInterface {
-
+class DefaultLaravelHandler implements HandlerInterface
+{
     /**
-     *
-     * Log activity in Laravels log handler
+     * Log activity in Laravels log handler.
      *
      * @param string $text
      * @param $userId
-     * @param array $attributes
-     * @return boolean
+     * @param array  $attributes
      *
+     * @return boolean
      */
     public function log($text, $userId = '', $attributes = [])
     {
         $logText = $text;
-        $logText .= ($userId != '' ? ' (by user_id '  . $userId . ')' : '');
-        $logText .= (count($attributes)) ? PHP_EOL . print_r($attributes, true) : '';
+        $logText .= ($userId != '' ? ' (by user_id '.$userId.')' : '');
+        $logText .= (count($attributes)) ? PHP_EOL.print_r($attributes, true) : '';
 
         Log::info($logText);
 
         return true;
     }
 
-
     /**
-     *
-     * Clean old log records
+     * Clean old log records.
      *
      * @param int $maxAgeInMonths
+     *
      * @return boolean
      */
-
     public function cleanLog($maxAgeInMonths)
     {
         //this handler can't clean it's records
