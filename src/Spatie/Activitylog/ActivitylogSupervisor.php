@@ -33,22 +33,17 @@ class ActivitylogSupervisor
      * Log some activity to all registered log handlers
      *
      * @param $text
-     * @param string $user
+     * @param string $userId
      * @return bool
      */
-    public function log($text, $user ='')
+    public function log($text, $userId = '')
     {
-        if ($user == '') {
-            $user = Auth::user() ?: '';
-        }
-        if (is_numeric($user)) {
-            $user = User::findOrFail($user);
-        }
+        $userId = $this->normalizeUserId($userId);
 
         $ipAddress = Request::getClientIp();
 
         foreach($this->logHandlers as $logHandler) {
-            $logHandler->log($text, $user, compact('ipAddress'));
+            $logHandler->log($text, $userId, compact('ipAddress'));
         }
 
         return true;
@@ -66,5 +61,24 @@ class ActivitylogSupervisor
         }
 
         return true;
+    }
+
+    /**
+     * Normalize the user id.
+     *
+     * @param $userId
+     * @return int
+     */
+    public function normalizeUserId($userId)
+    {
+        if (is_object($userId)) {
+            return $userId->id;
+        }
+
+        if ($userId == '' && Auth::check()) {
+            return Auth::user()->id;
+        }
+
+        return '';
     }
 }

@@ -12,15 +12,15 @@ class DefaultLaravelHandler implements HandlerInterface {
      * Log activity in Laravels log handler
      *
      * @param string $text
-     * @param string $user
+     * @param $userId
      * @param array $attributes
      * @return boolean
      *
      */
-    public function log($text, $user = '', $attributes = [])
+    public function log($text, $userId = '', $attributes = [])
     {
         $logText = $text;
-        $logText .= ($user ? ' (by user_id '  . $user->id . ')' : '');
+        $logText .= ($userId != '' ? ' (by user_id '  . $userId . ')' : '');
         $logText .= (count($attributes)) ? PHP_EOL . print_r($attributes, true) : '';
 
         Log::info($logText);

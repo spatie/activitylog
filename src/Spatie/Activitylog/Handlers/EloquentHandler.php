@@ -14,19 +14,19 @@ class EloquentHandler implements HandlerInterface {
      * Log activity in an Eloquent model
      *
      * @param string $text
-     * @param string $user
+     * @param $userId
      * @param array $attributes
      * @return boolean
      *
      */
 
-    public function log($text, $user = '', $attributes = [])
+    public function log($text, $userId = '', $attributes = [])
 
     {
         Activity::create(
             [
                 'text'       => $text,
-                'user_id'    => ($user ? $user->id : null),
+                'user_id'    => ($userId == '' ? null : $userId),
                 'ip_address' => $attributes['ipAddress'],
             ]
         );
