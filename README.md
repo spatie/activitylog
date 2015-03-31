@@ -141,7 +141,6 @@ If you discover any security related issues, please email freek@spatie.be instea
 ## Credits
 
 - [Freek Van der Herten](https://github.com/freekmurze)
-- [Matthias De Winter](https://github.com/MatthiasDeWinter)
 - [All Contributors](../../contributors)
 
 ## License
