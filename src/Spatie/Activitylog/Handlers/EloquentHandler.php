@@ -3,10 +3,9 @@
 namespace Spatie\Activitylog\Handlers;
 
 use Spatie\Activitylog\Models\Activity;
-use Spatie\Activitylog\Handlers\ActivitylogHandler as HandlerInterface;
 use Carbon\Carbon;
 
-class EloquentHandler implements HandlerInterface
+class EloquentHandler implements ActivitylogHandlerInterface
 {
     /**
      * Log activity in an Eloquent model.

@@ -1,6 +1,6 @@
 <?php namespace Spatie\Activitylog\Handlers;
 
-interface ActivitylogHandler
+interface ActivitylogHandlerInterface
 {
     /**
      * Log some activity.

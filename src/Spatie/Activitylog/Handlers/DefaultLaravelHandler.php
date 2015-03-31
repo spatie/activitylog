@@ -3,9 +3,8 @@
 namespace Spatie\Activitylog\Handlers;
 
 use Log;
-use Spatie\Activitylog\Handlers\ActivitylogHandler as HandlerInterface;
 
-class DefaultLaravelHandler implements HandlerInterface
+class DefaultLaravelHandler implements ActivitylogHandlerInterface
 {
     /**
      * Log activity in Laravels log handler.
