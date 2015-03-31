@@ -1,8 +1,8 @@
 <?php namespace Spatie\Activitylog;
 
 use Illuminate\Config\Repository;
+use Illuminate\Auth\Guard;
 use Spatie\Activitylog\Handlers\DefaultLaravelHandler;
-use Auth;
 use Request;
 use Config;
 
@@ -13,19 +13,23 @@ class ActivitylogSupervisor
      */
     protected $logHandlers = [];
 
+    protected $auth;
+
     /**
      * Create the logsupervisor using a default Handler
      * Also register Laravels Log Handler if needed.
      *
      * @param Handlers\ActivitylogHandlerInterface $handler
      * @param Repository $config
+     * @param Guard $auth
      */
-    public function __construct(Handlers\ActivitylogHandlerInterface $handler, Repository $config)
+    public function __construct(Handlers\ActivitylogHandlerInterface $handler, Repository $config, Guard $auth)
     {
         $this->logHandlers[] = $handler;
         if ($config->get('activitylog.alsoLogInDefaultLog')) {
             $this->logHandlers[] = new DefaultLaravelHandler();
         }
+        $this->auth = $auth;
     }
 
     /**
@@ -76,10 +80,10 @@ class ActivitylogSupervisor
             return $userId->id;
         }
 
-        if ($userId == '' && Auth::check()) {
-            return Auth::user()->id;
+        if ($userId == '' && $this->auth->check()) {
+            return $this->auth->user()->id;
         }
 
-        return '';
+        return $userId;
     }
 }
