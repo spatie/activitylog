@@ -129,3 +129,21 @@ Over time your log will grow. To clean up the database table you can run this co
 Activity::cleanLog();
 ```
 By default records older than 2 months will be deleted. The number of months can be modified in the config-file of the package.
+
+## Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+
+## Security
+
+If you discover any security related issues, please email freek@spatie.be instead of using the issue tracker.
+
+## Credits
+
+- [Freek Van der Herten](https://github.com/freekmurze)
+- [Matthias De Winter](https://github.com/MatthiasDeWinter)
+- [All Contributors](../../contributors)
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
