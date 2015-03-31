@@ -1,5 +1,6 @@
 <?php namespace Spatie\Activitylog;
 
+use Illuminate\Config\Repository;
 use Spatie\Activitylog\Handlers\DefaultLaravelHandler;
 use Auth;
 use Request;
@@ -16,12 +17,13 @@ class ActivitylogSupervisor
      * Create the logsupervisor using a default Handler
      * Also register Laravels Log Handler if needed.
      *
-     * @param Handlers\ActivitylogHandler $handler
+     * @param Handlers\ActivitylogHandlerInterface $handler
+     * @param Repository $config
      */
-    public function __construct(Handlers\ActivitylogHandler $handler)
+    public function __construct(Handlers\ActivitylogHandlerInterface $handler, Repository $config)
     {
         $this->logHandlers[] = $handler;
-        if (Config::get('activitylog.alsoLogInDefaultLog')) {
+        if ($config->get('activitylog.alsoLogInDefaultLog')) {
             $this->logHandlers[] = new DefaultLaravelHandler();
         }
     }
