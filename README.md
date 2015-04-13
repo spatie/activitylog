@@ -120,6 +120,14 @@ public function getActivityDescriptionForEvent($eventName)
 ```
 The result of this function will be logged, unless the result is an empty string.
 
+### Retrieving logged entries
+All events will be logged in the `activity_log`-table. This package provides an Eloquent model to work with the table. You can use all the normal Eloquent methods that you know and love. Here's how you can get the last 100 activities together with the associated users.
+
+```php
+use Spatie\Activitylog\Models\Activity;
+
+$latestActivities = Activity::with('user')->latest()->limit(100)->get();
+```
 
 ### Cleaning up the log
 
