@@ -109,7 +109,7 @@ public function getActivityDescriptionForEvent($eventName)
 
     if ($eventName == 'updated')
     {
-        return 'Article "' . $this->name . '" was deleted';
+        return 'Article "' . $this->name . '" was updated';
     }
 
     if ($eventName == 'deleted')
