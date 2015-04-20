@@ -31,6 +31,5 @@
             "Spatie\\Activitylog\\": "src/"
         }
     },
-    "license": "MIT",
-    "minimum-stability": "stable"
+    "license": "MIT"
 }
