@@ -17,6 +17,8 @@ class ActivitylogSupervisor
 
     protected $auth;
 
+    protected $config;
+
     /**
      * Create the logsupervisor using a default Handler
      * Also register Laravels Log Handler if needed.
@@ -27,11 +29,15 @@ class ActivitylogSupervisor
      */
     public function __construct(Handlers\ActivitylogHandlerInterface $handler, Repository $config, Guard $auth)
     {
+        $this->config = $config;
+
         $this->logHandlers[] = $handler;
-        if ($config->get('activitylog.alsoLogInDefaultLog')) {
+        if ($this->config->get('activitylog.alsoLogInDefaultLog')) {
             $this->logHandlers[] = new DefaultLaravelHandler();
         }
         $this->auth = $auth;
+
+
     }
 
     /**
@@ -90,6 +96,6 @@ class ActivitylogSupervisor
             return $this->auth->user()->id;
         }
 
-        return Config::get('activitylog.defaultUserId');
+        return $this->config->get('activitylog.defaultUserId');
     }
 }
