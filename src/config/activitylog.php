@@ -22,4 +22,14 @@ return [
     |
     */
     'deleteRecordsOlderThanMonths' => 2,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Fallback user id if no user is logged in
+    |--------------------------------------------------------------------------
+    |
+    | When no user is logged in we fall back to this value.
+    |
+    */
+    'defaultUserId' => '',
     ];

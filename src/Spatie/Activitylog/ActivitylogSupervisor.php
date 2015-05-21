@@ -70,20 +70,22 @@ class ActivitylogSupervisor
     /**
      * Normalize the user id.
      *
-     * @param $userId
-     *
+     * @param  object|int $userId
      * @return int
      */
     public function normalizeUserId($userId)
     {
         if (is_object($userId)) {
-            return $userId->id;
+            // User model provided.
+            $userId = $userId->id;
+        } else if ($userId === '') {
+            // No user id provided, either get the logged in user or fallback to default.
+            if ($this->auth->check()) {
+                $userId = $this->auth->user()->id;
+            } else {
+                $userId = Config::get('activitylog.defaultUserId');
+            }
         }
-
-        if ($userId == '' && $this->auth->check()) {
-            return $this->auth->user()->id;
-        }
-
         return $userId;
     }
 }
