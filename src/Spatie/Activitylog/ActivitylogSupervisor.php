@@ -96,6 +96,10 @@ class ActivitylogSupervisor
             return $this->auth->user()->id;
         }
 
-        return $this->config->get('activitylog.defaultUserId');
+        if (is_numeric($this->config->get('activitylog.defaultUserId'))) {
+            return $this->config->get('activitylog.defaultUserId');
+        };
+
+        return '';
     }
 }
