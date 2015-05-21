@@ -14,14 +14,14 @@ class EloquentHandler implements ActivitylogHandlerInterface
      * @param $userId
      * @param array  $attributes
      *
-     * @return boolean
+     * @return bool
      */
     public function log($text, $userId = '', $attributes = [])
     {
         Activity::create(
             [
-                'text'       => $text,
-                'user_id'    => ($userId == '' ? null : $userId),
+                'text' => $text,
+                'user_id' => ($userId == '' ? null : $userId),
                 'ip_address' => $attributes['ipAddress'],
             ]
         );
@@ -34,7 +34,7 @@ class EloquentHandler implements ActivitylogHandlerInterface
      *
      * @param int $maxAgeInMonths
      *
-     * @return boolean
+     * @return bool
      */
     public function cleanLog($maxAgeInMonths)
     {

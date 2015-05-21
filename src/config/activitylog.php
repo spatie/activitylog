@@ -1,4 +1,5 @@
 <?php
+
 return [
 
     /*
@@ -28,8 +29,9 @@ return [
     | Fallback user id if no user is logged in
     |--------------------------------------------------------------------------
     |
-    | When no user is logged in we fall back to this value.
+    | If you don't specify a user id when logging some activity and no
+    | user is logged in, this id will be used.
     |
     */
     'defaultUserId' => '',
-    ];
+];

@@ -1,4 +1,6 @@
-<?php namespace Spatie\Activitylog;
+<?php
+
+namespace Spatie\Activitylog;
 
 use Activity;
 
@@ -35,4 +37,3 @@ trait LogsActivity
         ];
     }
 }
-

@@ -1,4 +1,6 @@
-<?php namespace Spatie\Activitylog;
+<?php
+
+namespace Spatie\Activitylog;
 
 use Illuminate\Support\ServiceProvider;
 

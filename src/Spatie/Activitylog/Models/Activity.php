@@ -1,4 +1,6 @@
-<?php namespace Spatie\Activitylog\Models;
+<?php
+
+namespace Spatie\Activitylog\Models;
 
 use Eloquent;
 use Config;

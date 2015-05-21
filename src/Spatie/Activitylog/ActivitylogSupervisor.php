@@ -1,4 +1,6 @@
-<?php namespace Spatie\Activitylog;
+<?php
+
+namespace Spatie\Activitylog;
 
 use Illuminate\Config\Repository;
 use Illuminate\Auth\Guard;
@@ -20,8 +22,8 @@ class ActivitylogSupervisor
      * Also register Laravels Log Handler if needed.
      *
      * @param Handlers\ActivitylogHandlerInterface $handler
-     * @param Repository $config
-     * @param Guard $auth
+     * @param Repository                           $config
+     * @param Guard                                $auth
      */
     public function __construct(Handlers\ActivitylogHandlerInterface $handler, Repository $config, Guard $auth)
     {
@@ -70,22 +72,24 @@ class ActivitylogSupervisor
     /**
      * Normalize the user id.
      *
-     * @param  object|int $userId
+     * @param object|int $userId
+     *
      * @return int
      */
     public function normalizeUserId($userId)
     {
-        if (is_object($userId)) {
-            // User model provided.
-            $userId = $userId->id;
-        } else if ($userId === '') {
-            // No user id provided, either get the logged in user or fallback to default.
-            if ($this->auth->check()) {
-                $userId = $this->auth->user()->id;
-            } else {
-                $userId = Config::get('activitylog.defaultUserId');
-            }
+        if (is_numeric($userId)) {
+            return $userId;
         }
-        return $userId;
+
+        if (is_object($userId)) {
+            return $userId->id;
+        }
+
+        if ($this->auth->check()) {
+            return $this->auth->user()->id;
+        }
+
+        return Config::get('activitylog.defaultUserId');
     }
 }

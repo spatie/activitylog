@@ -1,6 +1,8 @@
-<?php namespace Spatie\Activitylog;
+<?php
 
-interface logsActivityInterface
+namespace Spatie\Activitylog;
+
+interface LogsActivityInterface
 {
     /**
      * Get the message that needs to be logged for the given event.

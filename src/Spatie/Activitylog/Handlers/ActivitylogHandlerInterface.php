@@ -1,4 +1,6 @@
-<?php namespace Spatie\Activitylog\Handlers;
+<?php
+
+namespace Spatie\Activitylog\Handlers;
 
 interface ActivitylogHandlerInterface
 {
@@ -9,7 +11,7 @@ interface ActivitylogHandlerInterface
      * @param string $user
      * @param array  $attributes
      *
-     * @return boolean
+     * @return bool
      */
     public function log($text, $user = '', $attributes = []);
 
@@ -18,7 +20,7 @@ interface ActivitylogHandlerInterface
      *
      * @param int $maxAgeInMonths
      *
-     * @return boolean
+     * @return bool
      */
     public function cleanLog($maxAgeInMonths);
 }
