@@ -10,7 +10,7 @@ return [
     | Laravel logger handler
     |
     */
-    'alsoLogInDefaultLog'        => true,
+    'alsoLogInDefaultLog' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -21,5 +21,15 @@ return [
     | specified here will be deleted
     |
     */
-        'deleteRecordsOlderThanMonths'        => 2,
+    'deleteRecordsOlderThanMonths' => 2,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Fallback user id if no user is logged in
+    |--------------------------------------------------------------------------
+    |
+    | When no user is logged in we fall back to this value.
+    |
+    */
+    'defaultUserId' => '',
     ];
