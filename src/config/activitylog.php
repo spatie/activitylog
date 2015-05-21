@@ -10,7 +10,7 @@ return [
     | Laravel logger handler
     |
     */
-    'alsoLogInDefaultLog'        => true,
+    'alsoLogInDefaultLog' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -21,5 +21,5 @@ return [
     | specified here will be deleted
     |
     */
-    'deleteRecordsOlderThanMonths'        => 2,
+    'deleteRecordsOlderThanMonths' => 2,
     ];
