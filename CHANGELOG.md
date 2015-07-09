@@ -2,7 +2,7 @@
 
 All Notable changes to `activitylog` will be documented in this file
 
-### 2.1.2
+### 2.1.3
 - Renamed migration stub
  
 ### 2.1.1
