@@ -27,7 +27,7 @@ class ActivitylogServiceProvider extends ServiceProvider
         $timestamp = date('Y_m_d_His', time());
 
         $this->publishes([
-            __DIR__.'/../../migrations/create_activity_log_table.php' => base_path('/database/migrations/'.$timestamp.'_create_activity_log_table.php'),
+            __DIR__.'/../../migrations/create_activity_log_table.stub' => base_path('/database/migrations/'.$timestamp.'_create_activity_log_table.php'),
         ], 'migrations');
     }
 

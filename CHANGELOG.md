@@ -2,6 +2,9 @@
 
 All Notable changes to `activitylog` will be documented in this file
 
+### 2.1.2
+- Renamed migration stub
+ 
 ### 2.1.1
 - Only use configured default user id if it is numeric
 
