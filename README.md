@@ -45,8 +45,8 @@ Activitylog also comes with a facade, which provides an easy way to call it.
 // config/app.php
 
 'aliases' => [
-	...
-	'Activity' => 'Spatie\Activitylog\ActivitylogFacade',
+  ...
+  'Activity' => 'Spatie\Activitylog\ActivitylogFacade',
 ];
 ```
 
@@ -147,9 +147,9 @@ Logging some activity is very simple.
 
 /* 
   The log-function takes two parameters:
-  	- $text: the activity you wish to log.
-  	- $user: optional can be an user id or a user object. 
-  	         if not proved the id of Auth::user() will be used
+    - $text: the activity you wish to log.
+    - $user: optional can be an user id or a user object. 
+             if not proved the id of Auth::user() will be used
   
 */
 Activity::log('Some activity that you wish to log');
@@ -168,8 +168,9 @@ class Article implements LogsActivityInterface {
    use LogsActivity;
 ...
 ```
-Any Eloquent activity you would like to record needs to be returned by getRecordActivityEvents method. Per default we have enabled few activities.
-Feel free 
+### Eloquent events
+Any Eloquent activity you would like to record needs to be returned by getRecordActivityEvents method. Per default we have enabled few activities in the
+configuration file. you can enable or disable them by commenting
 
 ```php 
 
@@ -262,6 +263,20 @@ use Spatie\Activitylog\Models\Activity;
 
 $latestActivities = Activity::with('user')->latest()->limit(100)->get();
 ```
+
+### Retrieving activities related to a given model
+If one of your models is using `LogsActivity` trait, then you can get a record related activity by using the morph relationship already defined like below.
+```php
+$article = Article::find(1);
+$article->activities; //This returns a collections of all activites related to this record
+```
+Or you can using your chainable eloquent methods as usualy like below example
+
+```php
+$article = Article::find(1);
+$article->activities()->take(100)->get(); // Get 100 activity done on the article with ID 1
+```
+
 
 ### Cleaning up the log
 
