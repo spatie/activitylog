@@ -14,6 +14,9 @@ class Activity extends Eloquent
      */
     protected $table = 'activity_log';
 
+
+    protected $guarded = ['id'];
+
     /**
      * Get the user that the activity belongs to.
      *
@@ -21,8 +24,17 @@ class Activity extends Eloquent
      */
     public function user()
     {
-        return $this->belongsTo(Config::get('auth.model'), 'user_id');
+        return $this->belongsTo(Config::get('activity_user_model'), 'user_id');
     }
 
-    protected $guarded = ['id'];
+    /**
+     * Get the model object of the activity
+     *
+     * @return object
+     */
+
+    public function loggable()
+    {
+        return $this->morphTo();
+    }
 }
