@@ -1,4 +1,4 @@
-![Logo](/../master/branding/logo.png?raw=true "Logo")
+![Logo](https://raw.githubusercontent.com/spatie/activitylog/master/branding/activitylog.png "Logo")
 
 # Log the activity of your users
 
