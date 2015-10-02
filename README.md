@@ -1,3 +1,5 @@
+![Logo](/../master/branding/logo.png?raw=true "Logo")
+
 # Log the activity of your users
 
 [![Latest Version](https://img.shields.io/github/release/spatie/activitylog.svg?style=flat-square)](https://github.com/spatie/activitylog/releases)
