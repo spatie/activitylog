@@ -1,5 +1,4 @@
-![Logo](https://raw.githubusercontent.com/spatie/activitylog/master/branding/activitylog.png =100x20 "Logo")
-
+<img src="https://raw.githubusercontent.com/spatie/activitylog/master/branding/activitylog.png" width=100 height=100 />
 # Log the activity of your users
 
 [![Latest Version](https://img.shields.io/github/release/spatie/activitylog.svg?style=flat-square)](https://github.com/spatie/activitylog/releases)
