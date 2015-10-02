@@ -1,4 +1,4 @@
-<img align="left"  src="https://raw.githubusercontent.com/spatie/activitylog/master/branding/activitylog.png" width=75 height=75 />
+<img align="left"  src="https://raw.githubusercontent.com/spatie/activitylog/master/branding/activitylog.png" width=40 height=40 />
 
 # Log the activity of your users
 
