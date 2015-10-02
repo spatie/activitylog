@@ -1,4 +1,7 @@
+
+<div style="float: right">
 <img src="https://raw.githubusercontent.com/spatie/activitylog/master/branding/activitylog.png" width=100 height=100 />
+</div>
 # Log the activity of your users
 
 [![Latest Version](https://img.shields.io/github/release/spatie/activitylog.svg?style=flat-square)](https://github.com/spatie/activitylog/releases)
