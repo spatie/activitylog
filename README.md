@@ -1,5 +1,3 @@
-<img align="left"  src="https://raw.githubusercontent.com/spatie/activitylog/master/branding/activitylog.png" width=90 height=90 />
-
 # Log the activity of your users
 
 [![Latest Version](https://img.shields.io/github/release/spatie/activitylog.svg?style=flat-square)](https://github.com/spatie/activitylog/releases)
