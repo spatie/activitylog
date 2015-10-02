@@ -1,4 +1,4 @@
-![Logo](https://raw.githubusercontent.com/spatie/activitylog/master/branding/activitylog.png "Logo")
+![Logo](https://raw.githubusercontent.com/spatie/activitylog/master/branding/activitylog.png =100x20 "Logo")
 
 # Log the activity of your users
 
