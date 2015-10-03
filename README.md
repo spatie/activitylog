@@ -45,8 +45,8 @@ Activitylog also comes with a facade, which provides an easy way to call it.
 // config/app.php
 
 'aliases' => [
-	...
-	'Activity' => 'Spatie\Activitylog\ActivitylogFacade',
+  ...
+  'Activity' => 'Spatie\Activitylog\ActivitylogFacade',
 ];
 ```
 
@@ -56,6 +56,86 @@ Optionally you can publish the config file of this package.
 php artisan vendor:publish --provider="Spatie\Activitylog\ActivitylogServiceProvider" --tag="config"
 ```
 The configuration will be written to  ```config/activitylog.php```. The options provided are self explanatory.
+
+### Configurations
+```php 
+ /*
+    |--------------------------------------------------------------------------
+    | Also log to Laravel's default log handler
+    |--------------------------------------------------------------------------
+    |
+    | If "alsoLogInDefaultLog" the activity will also be logged in the default
+    | Laravel logger handler
+    |
+    */
+    'alsoLogInDefaultLog' => true,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Max age in months for log records
+    |--------------------------------------------------------------------------
+    |
+    | When running the cleanLog-command all recorder older than the number of months
+    | specified here will be deleted
+    |
+    */
+    'deleteRecordsOlderThanMonths' => 2,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Fallback user id if no user is logged in
+    |--------------------------------------------------------------------------
+    |
+    | If you don't specify a user id when logging some activity and no
+    | user is logged in, this id will be used.
+    |
+    */
+    'defaultUserId' => '',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Model for the users
+    |--------------------------------------------------------------------------
+    |
+    | While saving or retrieving activity per user, we need to know which model
+    | we are relating to, this model will be used
+    |
+    */
+    'activity_user_model' => '\Ceb\Models\User',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Verify if the user is authenticated by this model
+    |--------------------------------------------------------------------------
+    |
+    | Before we do any activity log, we need to know if the user who is doing it
+    | is authenticated or not, if he is authenticate then we get his id
+    |
+    */
+    'activity_auth_model' => '\Sentry::check', // For example this is same as Sentry::check()
+
+    /*
+    |--------------------------------------------------------------------------
+    | Authenticated user id object
+    |--------------------------------------------------------------------------
+    |
+    | For us to know if we need to use the logged in user for logs, we need to 
+    | first now if the user is authenticated or not.
+    |
+    */
+    'activity_authenticated_user_model' => '\Sentry::getUser',
+
+    /*
+    |--------------------------------------------------------------------------
+    | User id field to be called 
+    |--------------------------------------------------------------------------
+    |
+    | In other to avoid undefiened property errors, we will call activity model
+    | with this defined field if the user is authenticated only
+    |
+    */
+    'user_id_field_name' => 'id',
+  ```
 
 
 ## Usage
@@ -67,9 +147,9 @@ Logging some activity is very simple.
 
 /* 
   The log-function takes two parameters:
-  	- $text: the activity you wish to log.
-  	- $user: optional can be an user id or a user object. 
-  	         if not proved the id of Auth::user() will be used
+    - $text: the activity you wish to log.
+    - $user: optional can be an user id or a user object. 
+             if not proved the id of Auth::user() will be used
   
 */
 Activity::log('Some activity that you wish to log');
@@ -88,37 +168,90 @@ class Article implements LogsActivityInterface {
    use LogsActivity;
 ...
 ```
+### Eloquent events
+Any Eloquent activity you would like to record needs to be returned by getRecordActivityEvents method. Per default we have enabled few activities in the
+configuration file. you can enable or disable them by commenting
 
-The interface expects you to implement the `getActivityDescriptionForEvent`-function.
+```php 
 
-Here's an example of a possible implementation.
+    /*
+    |--------------------------------------------------------------------------
+    | User id field to be called 
+    |--------------------------------------------------------------------------
+    |
+    | Eloquent models fire several events, allowing you to hook into various 
+    | points in the model's lifecycle using the following methods  Events
+    | allow you to easily execute code each time a specific model class 
+    | is saved or updated in the database.with this defined field
+    | if the user is authenticated only
+    |
+    */
+    'record_activity_events' => [
+                                    // 'creating', // Whenever a new model is being saved for the first time
+                                    'created',     // Whenever a new model is saved for the first time
+                                    // 'updating', // If a model already existed in the database
+                                    'updated',     // If a model already existed in the database
+                                    // 'saving',   // If a model already existed in the database and the save method is called
+                                    //'saved',     // If a model already existed in the database and the save method is called
+                                    'deleting',    // Whenever a model is being deleted
+                                    'deleted',     // Whenever a model is being deleted
+                                    // 'restoring', // Whenever a model is being restored
+                                    // 'restored'  // Whenever a model is being restored
+                                ],
+```
+
+In the LogsActivity trait, we have created getActivityDescriptionForEvent() method for you and have added awesomeness of all eloquent event and the 
+current model name is used as the object name for this activity, However you are free to overright it and define your own messages in the model.
+
+Here is how it looks like:
 
 ```php
-/**
- * Get the message that needs to be logged for the given event name.
- *
- * @param string $eventName
- * @return string
- */
-public function getActivityDescriptionForEvent($eventName)
-{
-    if ($eventName == 'created')
+   /**
+    * Describe the event message
+    * @param  string $eventName  name of the event
+    * @return string     
+    */
+   public function getActivityDescriptionForEvent($eventName)
     {
-        return 'Article "' . $this->name . '" was created';
-    }
-
-    if ($eventName == 'updated')
-    {
-        return 'Article "' . $this->name . '" was updated';
-    }
-
-    if ($eventName == 'deleted')
-    {
-        return 'Article "' . $this->name . '" was deleted';
-    }
-
-    return '';
-}
+           // Getting classname without namespace and use it to identify the object
+           $modelName = join('', array_slice(explode('\\', get_class($this)), -1));
+           switch ($eventName) {
+            case 'creating':
+                 $activity = $modelName . ' was creating';
+                 break; 
+            case 'created':
+                 $activity = $modelName . ' was created';
+                 break; 
+            case 'updating':
+                 $activity = $modelName . ' was updating';
+                 break; 
+            case 'updated':
+                 $activity = $modelName . ' was updated';
+                 break; 
+            case 'saving':
+                 $activity = $modelName . ' was saving';
+                 break; 
+            case 'saved':
+                 $activity = $modelName . ' was saved';
+                 break; 
+            case 'deleting':
+                 $activity = $modelName . ' was deleting';
+                 break; 
+            case 'deleted':
+                 $activity = $modelName . ' was deleted';
+                 break; 
+            case 'restoring':
+                 $activity = $modelName . ' was restoring';
+                 break; 
+            case 'restored':
+                 $activity = $modelName . ' was restored';
+                 break;
+            default:
+                $activity = '';
+            break;
+          }
+          return $activity;
+        }
 ```
 The result of this function will be logged, unless the result is an empty string.
 
@@ -130,6 +263,20 @@ use Spatie\Activitylog\Models\Activity;
 
 $latestActivities = Activity::with('user')->latest()->limit(100)->get();
 ```
+
+### Retrieving activities related to a given model
+If one of your models is using `LogsActivity` trait, then you can get a record related activity by using the morph relationship already defined like below.
+```php
+$article = Article::find(1);
+$article->activities; //This returns a collections of all activites related to this record
+```
+Or you can using your chainable eloquent methods as usualy like below example
+
+```php
+$article = Article::find(1);
+$article->activities()->take(100)->get(); // Get 100 activity done on the article with ID 1
+```
+
 
 ### Cleaning up the log
 
