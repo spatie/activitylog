@@ -34,4 +34,14 @@ return [
     |
     */
     'defaultUserId' => '',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Ignored user for which actions will not be logged
+    |--------------------------------------------------------------------------
+    |
+    | If you want to disable logging for a certain user, add their id here.
+    |
+    */
+    'ignoredUserId' => '',
 ];

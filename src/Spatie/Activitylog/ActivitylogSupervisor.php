@@ -50,6 +50,10 @@ class ActivitylogSupervisor
      */
     public function log($text, $userId = '')
     {
+		if($this->isIgnoredUser($userId)) {
+			return false;
+		}
+
         $userId = $this->normalizeUserId($userId);
 
         $ipAddress = Request::getClientIp();
@@ -101,5 +105,23 @@ class ActivitylogSupervisor
         };
 
         return '';
+    }
+
+    /**
+     * Check if this is an ignored user.
+     *
+     * @param object|int $userId
+     *
+     * @return int
+     */
+    public function isIgnoredUser($userId)
+    {
+		$ignoredUser = $this->config->get('activitylog.ignoredUserId');
+
+		if ( ! is_numeric($ignoredUser)) {
+			return false;
+		}
+
+		return $this->normalizeUserId($userId) == $ignoredUser;
     }
 }

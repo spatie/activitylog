@@ -36,7 +36,7 @@ This service provider must be registered.
 You'll also need to publish and run the migration in order to create the db-table.
 ```
 php artisan vendor:publish --provider="Spatie\Activitylog\ActivitylogServiceProvider" --tag="migrations"
-php artisan migrate 
+php artisan migrate
 ```
 
 
@@ -65,12 +65,12 @@ The configuration will be written to  ```config/activitylog.php```. The options 
 Logging some activity is very simple.
 ```php
 
-/* 
+/*
   The log-function takes two parameters:
   	- $text: the activity you wish to log.
-  	- $user: optional can be an user id or a user object. 
+  	- $user: optional can be an user id or a user object.
   	         if not proved the id of Auth::user() will be used
-  
+
 */
 Activity::log('Some activity that you wish to log');
 ```
@@ -130,6 +130,17 @@ use Spatie\Activitylog\Models\Activity;
 
 $latestActivities = Activity::with('user')->latest()->limit(100)->get();
 ```
+
+### Ignoring a user
+
+If you want to disable logging for a certain user, add the user id to the `ignoredUserId` field in the configuration file:
+```php
+'ignoredUserId' => 1,
+```
+
+## Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ### Cleaning up the log
 
