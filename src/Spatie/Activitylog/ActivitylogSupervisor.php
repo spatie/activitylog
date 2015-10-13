@@ -4,6 +4,7 @@ namespace Spatie\Activitylog;
 
 use Illuminate\Config\Repository;
 use Illuminate\Auth\Guard;
+use Spatie\Activitylog\Handlers\BeforeHandler;
 use Spatie\Activitylog\Handlers\DefaultLaravelHandler;
 use Request;
 use Config;
@@ -23,21 +24,28 @@ class ActivitylogSupervisor
      * Create the logsupervisor using a default Handler
      * Also register Laravels Log Handler if needed.
      *
-     * @param Handlers\ActivitylogHandlerInterface $handler
+     * @param Handlers\ActivitylogHandlerInterface $logHandler
+     * @param Handlers\BeforeHandlerInterface      $beforeHandler
      * @param Repository                           $config
      * @param Guard                                $auth
      */
-    public function __construct(Handlers\ActivitylogHandlerInterface $handler, Repository $config, Guard $auth)
+    public function __construct(Handlers\ActivitylogHandlerInterface $logHandler, Handlers\BeforeHandler $beforeHandler, Repository $config, Guard $auth)
     {
         $this->config = $config;
 
-        $this->logHandlers[] = $handler;
+        $this->logHandlers[] = $logHandler;
+
         if ($this->config->get('activitylog.alsoLogInDefaultLog')) {
             $this->logHandlers[] = new DefaultLaravelHandler();
         }
+
+        if ($beforeCallback = $this->config->get('activitylog.beforeCallback')) {
+            $this->beforeHandler = new $beforeCallback;
+        } else {
+            $this->beforeHandler = $beforeHandler;
+        }
+
         $this->auth = $auth;
-
-
     }
 
     /**
@@ -50,12 +58,9 @@ class ActivitylogSupervisor
      */
     public function log($text, $userId = '')
     {
-		$ignoreHandler = app()->make(config('spatie.ignoreCallback',
-			'\Spatie\Activitylog\Handlers\IgnoreHandler'));
-
-		if($ignoreHandler->ignore()) {
-			return false;
-		}
+        if ($this->beforeHandler->ignore()) {
+            return false;
+        }
 
         $userId = $this->normalizeUserId($userId);
 

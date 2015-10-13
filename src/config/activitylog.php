@@ -37,11 +37,13 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Ignored user for which actions will not be logged
+    | Handler that is called before logging is done
     |--------------------------------------------------------------------------
     |
-    | If you want to disable logging for a certain user, add their id here.
+    | If you want to disable logging based on some custom conditions, create
+    | a handler class that implements the BeforeHandlerInterface and
+    | reference it here.
     |
     */
-    'ignoreCallback' => '\Spatie\Activitylog\Handlers\IgnoreHandler',
+    'beforeCallback' => null,
 ];

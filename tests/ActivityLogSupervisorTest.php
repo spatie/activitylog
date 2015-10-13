@@ -6,7 +6,6 @@ use Spatie\Activitylog\ActivitylogSupervisor;
 
 class ActivityLogSupervistorTest extends PHPUnit_Framework_TestCase
 {
-
     protected $logHandler;
     protected $activityLogSupervisor;
     protected $config;
@@ -57,5 +56,4 @@ class ActivityLogSupervistorTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame(123, $normalizedUserId);
     }
-
 }

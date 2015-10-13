@@ -2,10 +2,10 @@
 
 namespace Spatie\Activitylog\Handlers;
 
-interface IgnoreHandlerInterface
+interface BeforeHandlerInterface
 {
     /**
-     * Ignore logging if this function returns true.
+     * Don't log if this function returns true.
      *
      * @return bool
      */
