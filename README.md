@@ -122,6 +122,33 @@ public function getActivityDescriptionForEvent($eventName)
 ```
 The result of this function will be logged, unless the result is an empty string.
 
+### Disable logging under certain conditions
+If you want to disable logging under certain conditions, such as for a specific user, create a class in your application namespace that implements the `Spatie\Activitylog\Handlers\BeforeHandlerInterface`. This interface defines an `ignore()` method in which you can code any custom logic to determine whether logging should be ignored or not. Returning `true` from this function will ignore logging, returning `false` will continue with the logging. Add the namespaced class name to the `beforeCallback` field in the configuration file:
+```php
+'beforeCallback' => '\App\Handlers\BeforeHandler',
+```
+For example, this callback class could look like this to disable logging for the first user:
+```php
+<?php
+
+namespace App\Handlers;
+
+use Spatie\Activitylog\Handlers\BeforeHandlerInterface;
+
+class BeforeHandler implements BeforeHandlerInterface
+{
+    public function ignore()
+	{
+		if (\Auth::user()->id == 1)
+		{
+			return true;
+		}
+
+		return false;
+	}
+}
+```
+
 ### Retrieving logged entries
 All events will be logged in the `activity_log`-table. This package provides an Eloquent model to work with the table. You can use all the normal Eloquent methods that you know and love. Here's how you can get the last 100 activities together with the associated users.
 
@@ -129,13 +156,6 @@ All events will be logged in the `activity_log`-table. This package provides an 
 use Spatie\Activitylog\Models\Activity;
 
 $latestActivities = Activity::with('user')->latest()->limit(100)->get();
-```
-
-### Ignoring a user
-
-If you want to disable logging for a certain user, add the user id to the `ignoredUserId` field in the configuration file:
-```php
-'ignoredUserId' => 1,
 ```
 
 ## Contributing
