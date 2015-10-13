@@ -50,7 +50,10 @@ class ActivitylogSupervisor
      */
     public function log($text, $userId = '')
     {
-		if($this->isIgnoredUser($userId)) {
+		$ignoreHandler = app()->make(config('spatie.ignoreCallback',
+			'\Spatie\Activitylog\Handlers\IgnoreHandler'));
+
+		if($ignoreHandler->ignore()) {
 			return false;
 		}
 
@@ -105,23 +108,5 @@ class ActivitylogSupervisor
         };
 
         return '';
-    }
-
-    /**
-     * Check if this is an ignored user.
-     *
-     * @param object|int $userId
-     *
-     * @return int
-     */
-    public function isIgnoredUser($userId)
-    {
-		$ignoredUser = $this->config->get('activitylog.ignoredUserId');
-
-		if ( ! is_numeric($ignoredUser)) {
-			return false;
-		}
-
-		return $this->normalizeUserId($userId) == $ignoredUser;
     }
 }

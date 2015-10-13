@@ -43,5 +43,5 @@ return [
     | If you want to disable logging for a certain user, add their id here.
     |
     */
-    'ignoredUserId' => '',
+    'ignoreCallback' => '\Spatie\Activitylog\Handlers\IgnoreHandler',
 ];
