@@ -118,7 +118,7 @@ class ActivitylogSupervisor
      */
     protected function shouldLogCall($text, $userId)
     {
-        $beforeHandler = $this->config('activitylog.beforeHandler');
+        $beforeHandler = $this->config->get('activitylog.beforeHandler');
 
         if (is_null($beforeHandler) || $beforeHandler == '') {
             return true;
