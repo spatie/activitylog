@@ -36,7 +36,7 @@ This service provider must be registered.
 You'll also need to publish and run the migration in order to create the db-table.
 ```
 php artisan vendor:publish --provider="Spatie\Activitylog\ActivitylogServiceProvider" --tag="migrations"
-php artisan migrate 
+php artisan migrate
 ```
 
 
@@ -65,12 +65,12 @@ The configuration will be written to  ```config/activitylog.php```. The options 
 Logging some activity is very simple.
 ```php
 
-/* 
+/*
   The log-function takes two parameters:
   	- $text: the activity you wish to log.
-  	- $user: optional can be an user id or a user object. 
+  	- $user: optional can be an user id or a user object.
   	         if not proved the id of Auth::user() will be used
-  
+
 */
 Activity::log('Some activity that you wish to log');
 ```
@@ -122,6 +122,33 @@ public function getActivityDescriptionForEvent($eventName)
 ```
 The result of this function will be logged, unless the result is an empty string.
 
+### Disable logging under certain conditions
+If you want to disable logging under certain conditions, such as for a specific user, create a class in your application namespace that implements the `Spatie\Activitylog\Handlers\BeforeHandlerInterface`. This interface defines an `ignore()` method in which you can code any custom logic to determine whether logging should be ignored or not. Returning `true` from this function will ignore logging, returning `false` will continue with the logging. Add the namespaced class name to the `beforeCallback` field in the configuration file:
+```php
+'beforeCallback' => '\App\Handlers\BeforeHandler',
+```
+For example, this callback class could look like this to disable logging for the first user:
+```php
+<?php
+
+namespace App\Handlers;
+
+use Spatie\Activitylog\Handlers\BeforeHandlerInterface;
+
+class BeforeHandler implements BeforeHandlerInterface
+{
+    public function ignore()
+	{
+		if (\Auth::user()->id == 1)
+		{
+			return true;
+		}
+
+		return false;
+	}
+}
+```
+
 ### Retrieving logged entries
 All events will be logged in the `activity_log`-table. This package provides an Eloquent model to work with the table. You can use all the normal Eloquent methods that you know and love. Here's how you can get the last 100 activities together with the associated users.
 
@@ -130,6 +157,10 @@ use Spatie\Activitylog\Models\Activity;
 
 $latestActivities = Activity::with('user')->latest()->limit(100)->get();
 ```
+
+## Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ### Cleaning up the log
 

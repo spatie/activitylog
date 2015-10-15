@@ -34,4 +34,16 @@ return [
     |
     */
     'defaultUserId' => '',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Handler that is called before logging is done
+    |--------------------------------------------------------------------------
+    |
+    | If you want to disable logging based on some custom conditions, create
+    | a handler class that implements the BeforeHandlerInterface and
+    | reference it here.
+    |
+    */
+    'beforeCallback' => null,
 ];

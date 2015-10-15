@@ -6,7 +6,6 @@ use Spatie\Activitylog\ActivitylogSupervisor;
 
 class ActivityLogSupervistorTest extends PHPUnit_Framework_TestCase
 {
-
     protected $logHandler;
     protected $activityLogSupervisor;
     protected $config;
@@ -14,11 +13,12 @@ class ActivityLogSupervistorTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->logHandler = Mockery::mock('\Spatie\Activitylog\Handlers\EloquentHandler');
+        $this->beforeHandler = Mockery::mock('\Spatie\Activitylog\Handlers\BeforeHandler');
         $this->config = Mockery::mock('\Illuminate\Config\Repository');
         $this->auth = Mockery::mock('Illuminate\Auth\Guard');
 
         $this->config->shouldReceive('get')->andReturn(false);
-        $this->activityLogSupervisor = new ActivitylogSupervisor($this->logHandler, $this->config, $this->auth);
+        $this->activityLogSupervisor = new ActivitylogSupervisor($this->logHandler, $this->beforeHandler, $this->config, $this->auth);
     }
 
     /**
@@ -57,5 +57,4 @@ class ActivityLogSupervistorTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame(123, $normalizedUserId);
     }
-
 }
