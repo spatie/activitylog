@@ -2,6 +2,9 @@
 
 All Notable changes to `activitylog` will be documented in this file
 
+### 2.2.0
+- Added a beforeHandler
+
 ### 2.1.3
 - Renamed migration stub
  
