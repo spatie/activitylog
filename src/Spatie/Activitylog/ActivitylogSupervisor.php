@@ -25,11 +25,10 @@ class ActivitylogSupervisor
      * Also register Laravels Log Handler if needed.
      *
      * @param Handlers\ActivitylogHandlerInterface $logHandler
-     * @param Handlers\BeforeHandlerInterface      $beforeHandler
      * @param Repository                           $config
      * @param Guard                                $auth
      */
-    public function __construct(Handlers\ActivitylogHandlerInterface $logHandler, Handlers\BeforeHandler $beforeHandler, Repository $config, Guard $auth)
+    public function __construct(Handlers\ActivitylogHandlerInterface $logHandler, Repository $config, Guard $auth)
     {
         $this->config = $config;
 
@@ -37,12 +36,6 @@ class ActivitylogSupervisor
 
         if ($this->config->get('activitylog.alsoLogInDefaultLog')) {
             $this->logHandlers[] = new DefaultLaravelHandler();
-        }
-
-        if ($beforeCallback = $this->config->get('activitylog.beforeCallback')) {
-            $this->beforeHandler = new $beforeCallback;
-        } else {
-            $this->beforeHandler = $beforeHandler;
         }
 
         $this->auth = $auth;
@@ -58,11 +51,11 @@ class ActivitylogSupervisor
      */
     public function log($text, $userId = '')
     {
-        if ($this->beforeHandler->ignore()) {
+        $userId = $this->normalizeUserId($userId);
+
+        if (! $this->shouldLogCall($text, $userId)) {
             return false;
         }
-
-        $userId = $this->normalizeUserId($userId);
 
         $ipAddress = Request::getClientIp();
 
@@ -113,5 +106,24 @@ class ActivitylogSupervisor
         };
 
         return '';
+    }
+
+    /**
+     * Determine if this call should be logged.
+     *
+     * @param $text
+     * @param $userId
+     *
+     * @return bool
+     */
+    protected function shouldLogCall($text, $userId)
+    {
+        $beforeHandler = $this->config('activitylog.beforeHandler');
+
+        if (is_null($beforeHandler) || $beforeHandler == '') {
+            return true;
+        }
+
+        return app($beforeHandler)->shouldLog($text, $userId);
     }
 }

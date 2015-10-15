@@ -5,9 +5,12 @@ namespace Spatie\Activitylog\Handlers;
 interface BeforeHandlerInterface
 {
     /**
-     * Don't log if this function returns true.
+     * Call to the log will only be made if this function returns true.
+     *
+     * @param string   $text   The text that will be logged
+     * @param int|null $userId The id of the user that is  associated with the log call
      *
      * @return bool
      */
-    public function ignore();
+    public function shouldLog($text, $userId);
 }

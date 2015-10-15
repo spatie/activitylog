@@ -122,12 +122,21 @@ public function getActivityDescriptionForEvent($eventName)
 ```
 The result of this function will be logged, unless the result is an empty string.
 
-### Disable logging under certain conditions
-If you want to disable logging under certain conditions, such as for a specific user, create a class in your application namespace that implements the `Spatie\Activitylog\Handlers\BeforeHandlerInterface`. This interface defines an `ignore()` method in which you can code any custom logic to determine whether logging should be ignored or not. Returning `true` from this function will ignore logging, returning `false` will continue with the logging. Add the namespaced class name to the `beforeCallback` field in the configuration file:
+### Using a before handler.
+If you want to disable logging under certain conditions, 
+such as for a specific user, create a class in your application
+namespace that implements the `Spatie\Activitylog\Handlers\BeforeHandlerInterface`. 
+
+This  interface defines an `shouldLog()` method in which you can code any custom logic to determine
+whether logging should be ignored or not. You must return `true` the call should be logged.
+ 
+To en the namespaced class nameto the `beforeHandler` field in the configuration file:
 ```php
-'beforeCallback' => '\App\Handlers\BeforeHandler',
+'beforeHandler' => '\App\Handlers\BeforeHandler',
 ```
-For example, this callback class could look like this to disable logging for the first user:
+
+For example, this callback class could look like this to disable
+logging a user with id of 1:
 ```php
 <?php
 
@@ -137,14 +146,11 @@ use Spatie\Activitylog\Handlers\BeforeHandlerInterface;
 
 class BeforeHandler implements BeforeHandlerInterface
 {
-    public function ignore()
+    public function shouldLog($text, $userId)
 	{
-		if (\Auth::user()->id == 1)
-		{
-			return true;
-		}
-
-		return false;
+		if ($userId == 1) return false;
+		
+		return true;
 	}
 }
 ```

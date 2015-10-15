@@ -45,5 +45,5 @@ return [
     | reference it here.
     |
     */
-    'beforeCallback' => null,
+    'beforeHandler' => null,
 ];
