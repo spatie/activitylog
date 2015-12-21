@@ -2,6 +2,9 @@
 
 All Notable changes to `activitylog` will be documented in this file
 
+### 2.2.1
+- Use database_path
+
 ### 2.2.0
 - Added a beforeHandler
 
