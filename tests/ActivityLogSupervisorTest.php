@@ -13,7 +13,7 @@ class ActivityLogSupervistorTest extends PHPUnit_Framework_TestCase
     {
         $this->logHandler = Mockery::mock('\Spatie\Activitylog\Handlers\EloquentHandler');
         $this->config = Mockery::mock('\Illuminate\Config\Repository');
-        $this->auth = Mockery::mock('Illuminate\Auth\Guard');
+        $this->auth = Mockery::mock('Illuminate\Contracts\Auth\Guard');
 
         $this->config->shouldReceive('get')->andReturn(false);
         $this->activityLogSupervisor = new ActivitylogSupervisor($this->logHandler, $this->config, $this->auth);

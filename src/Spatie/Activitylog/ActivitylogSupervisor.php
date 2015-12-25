@@ -3,7 +3,7 @@
 namespace Spatie\Activitylog;
 
 use Illuminate\Config\Repository;
-use Illuminate\Auth\Guard;
+use Illuminate\Contracts\Auth\Guard;
 use Spatie\Activitylog\Handlers\BeforeHandler;
 use Spatie\Activitylog\Handlers\DefaultLaravelHandler;
 use Request;
