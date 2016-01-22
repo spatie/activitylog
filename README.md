@@ -65,6 +65,9 @@ The configuration will be written to  ```config/activitylog.php```. The options 
 Logging some activity is very simple.
 ```php
 
+//at the top of your file you should import the facade.
+use Activity;
+...
 /*
   The log-function takes two parameters:
   	- $text: the activity you wish to log.
