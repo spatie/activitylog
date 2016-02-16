@@ -2,7 +2,7 @@
 
 All Notable changes to `activitylog` will be documented in this file
 
-### 2.4.0
+### 2.4.1
 - Added `userModel` configuration
 
 ### 2.3.0
