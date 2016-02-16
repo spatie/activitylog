@@ -27,7 +27,7 @@ class Activity extends Eloquent
 
     public function getAuthModelName()
     {
-        if (config('activitylog.user')) {
+        if (config('activitylog.userModel')) {
             return config('activitylog.userModel');
         }
         
