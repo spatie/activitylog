@@ -27,6 +27,10 @@ class Activity extends Eloquent
 
     public function getAuthModelName()
     {
+        if (config('activitylog.user')) {
+            return config('activitylog.userModel');
+        }
+        
         //laravel 5.0 - 5.1
         if (! is_null(config('auth.model'))) {
             return config('auth.model');
