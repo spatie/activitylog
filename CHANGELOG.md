@@ -2,6 +2,9 @@
 
 All Notable changes to `activitylog` will be documented in this file
 
+### 2.4.0
+- Added `userModel` configuration
+
 ### 2.3.0
 - Add compatibility with Laravel 5.2
 
