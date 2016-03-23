@@ -23,12 +23,16 @@ class ActivitylogServiceProvider extends ServiceProvider
             __DIR__.'/../../config/activitylog.php' => config_path('activitylog.php'),
         ], 'config');
 
-// Publish your migrations
-        $timestamp = date('Y_m_d_His', time());
+        $files = glob(database_path('/migrations/*_create_activity_log_table.php'));
 
-        $this->publishes([
-            __DIR__.'/../../migrations/create_activity_log_table.stub' => database_path('/migrations/'.$timestamp.'_create_activity_log_table.php'),
-        ], 'migrations');
+        if (! $files) {
+            // Publish your migrations
+            $timestamp = date('Y_m_d_His', time());
+
+            $this->publishes([
+                __DIR__.'/../../migrations/create_activity_log_table.stub' => database_path('/migrations/'.$timestamp.'_create_activity_log_table.php'),
+            ], 'migrations');
+        }
     }
 
     /**
