@@ -2,6 +2,9 @@
 
 All Notable changes to `activitylog` will be documented in this file
 
+### 2.4.2 - 2016-03-23
+- Make sure the migrations are not published twice
+
 ### 2.4.1
 - Added `userModel` configuration
 

@@ -20,17 +20,15 @@ class ActivitylogServiceProvider extends ServiceProvider
     {
         // Publish a config file
         $this->publishes([
-            __DIR__.'/../../config/activitylog.php' => config_path('activitylog.php'),
+            __DIR__ . '/../../config/activitylog.php' => config_path('activitylog.php'),
         ], 'config');
 
-        $files = glob(database_path('/migrations/*_create_activity_log_table.php'));
-
-        if (! $files) {
-            // Publish your migrations
+        if (!$this->migrationHasAlreadyBeenPublished()) {
+            // Publish migration
             $timestamp = date('Y_m_d_His', time());
 
             $this->publishes([
-                __DIR__.'/../../migrations/create_activity_log_table.stub' => database_path('/migrations/'.$timestamp.'_create_activity_log_table.php'),
+                __DIR__ . "/../../migrations/create_activity_log_table.stub" => database_path("/migrations/{$timestamp}_create_activity_log_table.php"),
             ], 'migrations');
         }
     }
@@ -59,5 +57,15 @@ class ActivitylogServiceProvider extends ServiceProvider
     public function provides()
     {
         return [];
+    }
+
+    /**
+     * @return bool
+     */
+    protected function migrationHasAlreadyBeenPublished()
+    {
+        $files = glob(database_path('/migrations/*_create_activity_log_table.php'));
+
+        return count($files) > 0;
     }
 }
