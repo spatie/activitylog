@@ -166,10 +166,6 @@ use Spatie\Activitylog\Models\Activity;
 $latestActivities = Activity::with('user')->latest()->limit(100)->get();
 ```
 
-## Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
 ### Cleaning up the log
 
 Over time your log will grow. To clean up the database table you can run this command:
