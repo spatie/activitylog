@@ -125,13 +125,13 @@ public function getActivityDescriptionForEvent($eventName)
 The result of this function will be logged, unless the result is an empty string.
 
 ### Using a before handler.
-If you want to disable logging under certain conditions, 
+If you want to disable logging under certain conditions,
 such as for a specific user, create a class in your application
-namespace that implements the `Spatie\Activitylog\Handlers\BeforeHandlerInterface`. 
+namespace that implements the `Spatie\Activitylog\Handlers\BeforeHandlerInterface`.
 
 This  interface defines an `shouldLog()` method in which you can code any custom logic to determine
 whether logging should be ignored or not. You must return `true` the call should be logged.
- 
+
 To en the namespaced class nameto the `beforeHandler` field in the configuration file:
 ```php
 'beforeHandler' => '\App\Handlers\BeforeHandler',
@@ -151,7 +151,7 @@ class BeforeHandler implements BeforeHandlerInterface
     public function shouldLog($text, $userId)
 	{
 		if ($userId == 1) return false;
-		
+
 		return true;
 	}
 }
@@ -165,10 +165,6 @@ use Spatie\Activitylog\Models\Activity;
 
 $latestActivities = Activity::with('user')->latest()->limit(100)->get();
 ```
-
-## Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ### Cleaning up the log
 
