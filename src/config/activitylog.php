@@ -57,4 +57,14 @@ return [
     |
     */
     'userModel' => null,
+
+    /*
+    |--------------------------------------------------------------------------
+    | The database table name where the logs are stored
+    |--------------------------------------------------------------------------
+    |
+    | This is the name of the database table where the logs are stored.
+    |
+    */
+    'tableName' => 'activity_log',
 ];

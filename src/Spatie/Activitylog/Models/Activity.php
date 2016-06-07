@@ -8,12 +8,18 @@ use Exception;
 
 class Activity extends Eloquent
 {
+
     /**
-     * The database table used by the model.
+     * Create a new Eloquent model instance.
      *
-     * @var string
+     * @param array $attributes
      */
-    protected $table = 'activity_log';
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        $this->setTable(config('activitylog.tableName', 'activity_log'));
+    }
 
     /**
      * Get the user that the activity belongs to.
