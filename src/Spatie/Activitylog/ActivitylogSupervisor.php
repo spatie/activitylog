@@ -2,6 +2,7 @@
 
 namespace Spatie\Activitylog;
 
+use Eloquent;
 use Illuminate\Config\Repository;
 use Illuminate\Contracts\Auth\Guard;
 use Spatie\Activitylog\Handlers\BeforeHandler;
@@ -92,13 +93,17 @@ class ActivitylogSupervisor
         if (is_numeric($userId)) {
             return $userId;
         }
+        
+        if ($userId instanceof Eloquent) {
+            return $userId->getKey();
+        }
 
         if (is_object($userId)) {
             return $userId->id;
         }
 
         if ($this->auth->check()) {
-            return $this->auth->user()->id;
+            return $this->auth->user()->getAuthIdentifier();
         }
 
         if (is_numeric($this->config->get('activitylog.defaultUserId'))) {
