@@ -2,6 +2,7 @@
     "name": "spatie/activitylog",
     "description": "A very simple activity logger to monitor the users of your website or application",
     "homepage": "https://github.com/spatie/activitylog",
+    "abandoned" : "This package has been replaced by spatie/laravel-activitylog",
     "keywords":
         [
             "log",

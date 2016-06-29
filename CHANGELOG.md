@@ -2,6 +2,9 @@
 
 All Notable changes to `activitylog` will be documented in this file
 
+### 2.4.3 - 2016-06-29
+- mark package as abandoned
+
 ### 2.4.2 - 2016-03-23
 - Make sure the migrations are not published twice
 
