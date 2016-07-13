@@ -8,7 +8,7 @@
 
 ## EOL-warning
 
-This package has been abandoned on 2016-07-28. Please use [laravel-activitylog](https://github.com/spatie/laravel-activitylog) instead.
+This package has been abandoned on 2016-06-28. Please use [laravel-activitylog](https://github.com/spatie/laravel-activitylog) instead.
 
 ## Description
 
