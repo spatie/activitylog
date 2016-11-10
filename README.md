@@ -90,6 +90,13 @@ use Activity;
 */
 Activity::log('Some activity that you wish to log');
 ```
+
+If you need to log mongodb related activities, use ActivityMongo for keep logging.
+
+```
+ActivityMongo::log('Some activity that you wish to log');
+```
+
 The string you pass to function gets written in a db-table together with a timestamp, the ip address and the user agent of the user.
 
 ### Log model events
