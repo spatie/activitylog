@@ -172,7 +172,7 @@ class BeforeHandler implements BeforeHandlerInterface
 ```
 
 ### Retrieving logged entries
-All events will be logged in the `activity_log`-table. This package provides an Eloquent model to work with the table. You can use all the normal Eloquent methods that you know and love. Here's how you can get the last 100 activities together with the associated users.
+All events will be logged in the `activity_log`-table by default or the table name specified in the config file. This package provides an Eloquent model to work with the table. You can use all the normal Eloquent methods that you know and love. Here's how you can get the last 100 activities together with the associated users.
 
 ```php
 use Spatie\Activitylog\Models\Activity;
